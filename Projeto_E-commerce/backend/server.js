@@ -15,33 +15,61 @@ mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => console.log('MongoDB conectado'))
-  .catch(err => console.log(err));
+  .catch(err => console.log('Erro ao conectar ao MongoDB:', err));
 
-// Criar Schema de Produto
+// Criar Schema de Produto com o campo stock
 const ProductSchema = new mongoose.Schema({
-    name: String,
-    price: Number,
-    imageUrl: String
+    name: { type: String, required: true },
+    price: { type: Number, required: true },
+    imageUrl: { type: String, required: true },
+    stock: { type: Number, required: true }
 });
 
 const Product = mongoose.model('Product', ProductSchema);
 
 // Rotas da API
+
+// Rota para buscar todos os produtos
 app.get('/products', async (req, res) => {
-    const products = await Product.find();
-    res.json(products);
+    try {
+        const products = await Product.find();
+        res.json(products);
+    } catch (error) {
+        console.error('Erro ao buscar produtos:', error);
+        res.status(500).json({ error: 'Erro ao buscar produtos' });
+    }
 });
 
+// Rota para adicionar um novo produto
 app.post('/products', async (req, res) => {
-    const { name, price, imageUrl } = req.body;
-    const newProduct = new Product({ name, price, imageUrl });
-    await newProduct.save();
-    res.json(newProduct);
+    const { name, price, imageUrl, stock } = req.body;
+
+    if (!name || !price || !imageUrl || stock === undefined) {
+        return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
+    }
+
+    try {
+        const newProduct = new Product({ name, price, imageUrl, stock });
+        await newProduct.save();
+        res.status(201).json(newProduct);
+    } catch (error) {
+        console.error('Erro ao adicionar o produto:', error);
+        res.status(500).json({ error: 'Erro ao adicionar o produto' });
+    }
 });
 
+// Rota para excluir um produto
 app.delete('/products/:id', async (req, res) => {
-    await Product.findByIdAndDelete(req.params.id);
-    res.json({ message: 'Produto removido' });
+    try {
+        const product = await Product.findByIdAndDelete(req.params.id);
+        if (!product) {
+            return res.status(404).json({ error: 'Produto não encontrado' });
+        }
+        res.json({ message: 'Produto removido com sucesso' });
+    } catch (error) {
+        console.error('Erro ao remover produto:', error);
+        res.status(500).json({ error: 'Erro ao remover o produto' });
+    }
 });
 
 // Iniciar servidor

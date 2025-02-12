@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Adicionar Produtos</title>
+    <link rel="stylesheet" href="../admin/styles.css"> <!-- Caminho relativo para o CSS -->
+</head>
+<body>
+    <header>
+        <h1>Painel de Administração</h1>
+        <a href="../client/index.html" class="btn">Ir para a Loja</a> <!-- Caminho relativo para a loja -->
+    </header>
+
+    <section id="product-form" class="form-section">
+        <h2>Adicionar Novo Produto</h2>
+        <form onsubmit="event.preventDefault(); addProduct();">
+            <input type="text" id="product-name" placeholder="Nome do Produto" required>
+            <input type="number" id="product-price" placeholder="Preço" required>
+            <input type="text" id="product-image" placeholder="URL da Imagem" required>
+            <input type="number" id="product-stock" placeholder="Estoque" min="0" required>
+            <button type="submit" class="btn">Adicionar Produto</button>
+        </form>
+    </section>
+
+    <section id="admin-products" class="product-list">
+        <h2>Produtos Cadastrados</h2>
+        <div id="admin-products-list"></div>
+    </section>
+
+    <script src="../admin/admin.js"></script> <!-- Caminho relativo para o JS -->
+</body>
+</html>

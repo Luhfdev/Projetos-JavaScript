@@ -1,0 +1,196 @@
+/* Resetar algumas configurações padrão do navegador */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header */
+header {
+    background-color: #1f2937;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 10px;
+    font-size: 2.5em;
+}
+
+header .btn {
+    color: #1f2937;
+    background-color: #f4f4f4;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+header .btn:hover {
+    background-color: #ddd;
+}
+
+/* Formulário */
+.form-section {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 30px;
+    margin: 20px auto;
+    max-width: 600px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form input, form button {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 1em;
+}
+
+form input:focus, form button:focus {
+    outline: none;
+    border-color: #1f2937;
+}
+
+form button {
+    background-color: #1f2937;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #374151;
+}
+
+/* Tabela de Produtos */
+.product-list {
+    max-width: 900px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.product-list h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.product-list .admin-product {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.product-list .admin-product:last-child {
+    border-bottom: none;
+}
+
+.product-list .admin-product span {
+    font-size: 1.1em;
+    color: #333;
+}
+
+.product-list .admin-product button {
+    background-color: #e02424;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.product-list .admin-product button:hover {
+    background-color: #b32d2d;
+}
+
+@media (max-width: 768px) {
+    .product-list {
+        padding: 15px;
+    }
+
+    .form-section {
+        padding: 20px;
+        margin: 10px;
+    }
+}
+
+/* Tabela de Produtos */
+.product-list {
+    max-width: 900px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.product-list h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.product-list .admin-product {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.product-list .admin-product:last-child {
+    border-bottom: none;
+}
+
+/* Exibir imagem do produto ao lado */
+.product-image img {
+    width: 50px; /* Controla o tamanho da imagem */
+    height: 50px; /* Controla a altura */
+    object-fit: cover; /* Mantém a imagem proporcional e evita distorção */
+    margin-right: 15px; /* Espaçamento entre a imagem e os outros detalhes */
+    border-radius: 5px; /* Borda arredondada na imagem */
+}
+
+/* Detalhes do produto */
+.product-details {
+    flex-grow: 1; /* Garante que o texto ocupe o restante do espaço */
+}
+
+/* Estilo do botão de exclusão */
+.product-list .admin-product button {
+    background-color: #e02424;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.product-list .admin-product button:hover {
+    background-color: #b32d2d;
+}
