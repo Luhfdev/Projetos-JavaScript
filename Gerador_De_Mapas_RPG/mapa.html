@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criador de Mapas RPG</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        #map-container { display: inline-block; margin-top: 20px; position: relative; }
+        canvas { border: 2px solid black; cursor: pointer; }
+        .controls { margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Criador de Mapas RPG 🗺️</h1>
+    <div class="controls">
+        <label for="width">Largura:</label>
+        <input type="number" id="width" value="10" min="5" max="50">
+        <label for="height">Altura:</label>
+        <input type="number" id="height" value="10" min="5" max="50">
+        <button onclick="generateMap()">Gerar Mapa</button>
+        <button onclick="downloadMap()">Baixar Mapa</button>
+    </div>
+    <div id="map-container">
+        <canvas id="mapCanvas"></canvas>
+    </div>
+    
+    <script>
+        const terrainImages = {
+            'floresta': 'images/floresta.png',
+            'montanha': 'images/montanha.png',
+            'lago': 'images/lago.png',
+            'deserto': 'images/deserto.png'
+        };
+        
+        const terrains = Object.keys(terrainImages);
+        const cities = [];
+        const images = {};
+        let imagesLoaded = 0;
+        let totalImages = terrains.length;
+        
+        function preloadImages(callback) {
+            imagesLoaded = 0;
+            terrains.forEach(terrain => {
+                images[terrain] = new Image();
+                images[terrain].src = terrainImages[terrain];
+                images[terrain].onload = () => {
+                    imagesLoaded++;
+                    if (imagesLoaded === totalImages) callback();
+                };
+                images[terrain].onerror = () => {
+                    console.error(`Erro ao carregar a imagem: ${terrainImages[terrain]}`);
+                };
+            });
+        }
+        
+        function generateMap() {
+            preloadImages(() => {
+                if (imagesLoaded < totalImages) {
+                    console.error("Nem todas as imagens foram carregadas corretamente.");
+                    return;
+                }
+                const width = parseInt(document.getElementById('width').value);
+                const height = parseInt(document.getElementById('height').value);
+                const canvas = document.getElementById('mapCanvas');
+                const ctx = canvas.getContext('2d');
+                const cellSize = 40;
+                
+                canvas.width = width * cellSize;
+                canvas.height = height * cellSize;
+                cities.length = 0;
+                
+                for (let y = 0; y < height; y++) {
+                    for (let x = 0; x < width; x++) {
+                        let terrain = terrains[Math.floor(Math.random() * terrains.length)];
+                        ctx.drawImage(images[terrain], x * cellSize, y * cellSize, cellSize, cellSize);
+                    }
+                }
+                canvas.onclick = (event) => addCity(event, cellSize);
+            });
+        }
+
+        function addCity(event, cellSize) {
+            const canvas = document.getElementById('mapCanvas');
+            const ctx = canvas.getContext('2d');
+            const rect = canvas.getBoundingClientRect();
+            const x = Math.floor((event.clientX - rect.left) / cellSize);
+            const y = Math.floor((event.clientY - rect.top) / cellSize);
+            const cityName = prompt("Nome da cidade:");
+            if (cityName) {
+                cities.push({ x, y, name: cityName });
+                drawCities(ctx, cellSize);
+            }
+        }
+
+        function drawCities(ctx, cellSize) {
+            ctx.fillStyle = "black";
+            ctx.font = "14px Arial bold";
+            ctx.textAlign = "center";
+            cities.forEach(city => {
+                ctx.fillText(city.name, city.x * cellSize + cellSize / 2, city.y * cellSize + cellSize / 2);
+            });
+        }
+
+        function downloadMap() {
+            const canvas = document.getElementById('mapCanvas');
+            const ctx = canvas.getContext('2d');
+            drawCities(ctx, 40); // Garante que as cidades são desenhadas antes de baixar
+            const link = document.createElement('a');
+            link.download = 'mapa_rpg.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+    </script>
+</body>
+</html>
