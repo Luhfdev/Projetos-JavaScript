@@ -1,7 +1,5 @@
-// Carregar o carrinho salvo no localStorage
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-// Atualizar a exibição do carrinho
 function updateCartDisplay() {
     const cartDetails = document.getElementById('cart-details');
     cartDetails.innerHTML = '';
@@ -29,11 +27,9 @@ function updateCartDisplay() {
         total += product.price * product.quantity;
     });
 
-    // Exibe o total do carrinho
     document.getElementById('total-price').textContent = total.toFixed(2);
 }
 
-// Remover um item do carrinho
 function removeFromCart(index) {
     if (cart[index].quantity > 1) {
         cart[index].quantity -= 1;
@@ -45,7 +41,6 @@ function removeFromCart(index) {
     updateCartDisplay();
 }
 
-// Finalizar compra (simulado)
 document.getElementById('checkout').addEventListener('click', () => {
     if (cart.length > 0) {
         alert(`Compra finalizada! Total: R$ ${cart.reduce((total, product) => total + product.price * product.quantity, 0).toFixed(2)}`);
@@ -57,5 +52,4 @@ document.getElementById('checkout').addEventListener('click', () => {
     }
 });
 
-// Carregar carrinho ao abrir a página
 updateCartDisplay();

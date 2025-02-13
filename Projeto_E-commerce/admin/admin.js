@@ -1,6 +1,5 @@
-const API_URL = 'http://localhost:5000/products'; // URL do backend
+const API_URL = 'http://localhost:5000/products'; 
 
-// Buscar produtos e exibir na página de administração
 async function fetchAdminProducts() {
     try {
         const response = await fetch(API_URL);
@@ -11,7 +10,6 @@ async function fetchAdminProducts() {
     }
 }
 
-// Renderizar produtos na tela de administração
 function renderAdminProducts(products) {
     const adminProductsContainer = document.getElementById('admin-products-list');
     adminProductsContainer.innerHTML = '';
@@ -32,14 +30,12 @@ function renderAdminProducts(products) {
     });
 }
 
-// Adicionar novo produto ao backend
 async function addProduct() {
     const name = document.getElementById('product-name').value;
     const price = parseFloat(document.getElementById('product-price').value);
-    const stock = parseInt(document.getElementById('product-stock').value); // Garantir que seja um número inteiro
+    const stock = parseInt(document.getElementById('product-stock').value); 
     const imageUrl = document.getElementById('product-image').value;
 
-    // Validar campos
     if (!name || !price || !imageUrl || isNaN(stock) || stock < 0) {
         alert('Preencha todos os campos corretamente!');
         return;
@@ -49,12 +45,12 @@ async function addProduct() {
         const response = await fetch(API_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, price, stock, imageUrl }) // Enviar estoque corretamente
+            body: JSON.stringify({ name, price, stock, imageUrl }) 
         });
 
         if (response.ok) {
             alert('Produto adicionado com sucesso!');
-            fetchAdminProducts(); // Recarregar os produtos após adicionar
+            fetchAdminProducts(); 
         } else {
             const result = await response.json();
             alert(result.error || 'Erro ao adicionar o produto');
@@ -64,7 +60,6 @@ async function addProduct() {
     }
 }
 
-// Remover produto do backend
 async function deleteProduct(productId) {
     const confirmDelete = confirm("Tem certeza que deseja excluir este produto?");
     if (!confirmDelete) return;
@@ -74,7 +69,7 @@ async function deleteProduct(productId) {
 
         if (response.ok) {
             alert('Produto removido com sucesso!');
-            fetchAdminProducts(); // Recarregar os produtos após remoção
+            fetchAdminProducts(); 
         } else {
             alert('Erro ao remover o produto.');
         }
@@ -83,5 +78,4 @@ async function deleteProduct(productId) {
     }
 }
 
-// Carregar produtos ao iniciar a página de administração
 fetchAdminProducts();
