@@ -1,0 +1,166 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Corpo */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+h1 {
+    margin-bottom: 30px;
+    color: #2c3e50;
+}
+
+/* Container principal */
+.dashboard {
+    width: 90%;
+    max-width: 1200px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Container de formulário */
+.input-container {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.input-container label {
+    margin-bottom: 5px;
+    display: block;
+}
+
+.input-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.input-container button {
+    background-color: #4BC0C0;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.input-container button:hover {
+    background-color: #36a89f;
+}
+
+/* Container de botões */
+.button-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+button {
+    background-color: #4BC0C0;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #36a89f;
+}
+
+.filters-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+/* Adicionando espaçamento entre os inputs e labels */
+select, input[type="color"], input[type="date"] {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+label {
+    margin-left: 10px;
+    font-size: 16px;
+}
+
+/* Container de gráficos */
+.charts-container {
+    margin-top: 30px;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Canvas (gráfico) */
+canvas {
+    width: 70% !important;  /* Aumentar a largura para 70% do container */
+    height: 400px !important; /* Aumentar a altura para 350px */
+    max-width: 700px !important;  /* Aumentar o tamanho máximo para 700px */
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .button-container {
+        flex-direction: column;
+    }
+
+    .filters-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    select, input[type="color"] {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    button {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    /* Ajuste no gráfico em telas menores */
+    canvas {
+        width: 85% !important;  /* Aumentar um pouco em telas menores */
+        height: 300px !important; /* Ajuste de altura */
+    }
+}
+
+/* Animação suave para o gráfico */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

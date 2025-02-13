@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Interativo de Dados</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard">
+        <h1>Dashboard Interativo</h1>
+        <div class="button-container">
+            <button id="showBarChart">Gráfico de Vendas</button>
+            <button id="showLineChart">Gráfico de Tendência</button>
+            <button id="showPieChart">Gráfico de Categorias</button>
+        </div>
+        <div class="filters-container">
+            <select id="periodFilter">
+                <option value="monthly">Mensal</option>
+                <option value="quarterly">Trimestral</option>
+            </select>
+            <input type="date" id="startDate" />
+            <input type="date" id="endDate" />
+            <input type="color" id="barColor" value="#4BC0C0" />
+            <label for="barColor">Cor das Barras</label>
+        </div>
+        <div class="data-input-container">
+            <h2>Insira os dados para o gráfico:</h2>
+            <div>
+                <input type="text" id="month" placeholder="Mês (ex: Jan)" />
+                <input type="number" id="sales" placeholder="Vendas (número)" />
+                <button id="addDataButton">Adicionar Dados</button>
+            </div>
+        </div>
+        <div class="charts-container">
+            <canvas id="salesChart"></canvas>
+        </div>
+        <button id="updateDataButton">Atualizar Dados</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

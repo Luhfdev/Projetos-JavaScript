@@ -67,7 +67,15 @@ a {
     font-weight: bold;
 }
 
-.product-card button {
+/* Contêiner para organizar botões */
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Botão de adicionar ao carrinho */
+.add-to-cart {
     background: #007bff;
     color: white;
     border: none;
@@ -75,11 +83,33 @@ a {
     border-radius: 5px;
     cursor: pointer;
     transition: background 0.3s;
+    margin-bottom: 10px; /* Espaçamento entre o botão e os de quantidade */
 }
 
-.product-card button:hover {
+.add-to-cart:hover {
     background: #0056b3;
 }
+
+/* Contêiner dos botões de quantidade */
+.quantity-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.quantity-controls button {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.quantity-controls button:hover {
+    background: #218838;
+}
+
 
 /* Carrinho */
 #cart {

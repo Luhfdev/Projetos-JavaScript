@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Conta</title>
+    <link rel="stylesheet" href="../client/user.css"> <!-- Estilos compartilhados -->
+</head>
+<body>
+    <header>
+        <h1>Minha Conta</h1>
+    </header>
+    
+    <section id="account-info">
+        <h2>Seus Dados</h2>
+        <p><strong>Nome:</strong> <span id="user-name"></span></p>
+        <p><strong>Idade:</strong> <span id="user-age"></span></p>
+        <p><strong>Sexo:</strong> <span id="user-gender"></span></p>
+        <p><strong>Endereço:</strong> <span id="user-address"></span></p>
+        <p><strong>Email:</strong> <span id="user-email"></span></p>
+        <p><strong>Telefone:</strong> <span id="user-phone"></span></p>
+
+        <button id="edit-button">Editar</button>
+        <button id="logout-button">Sair</button>
+
+        <div id="edit-form" style="display: none;">
+            <h2>Editar Dados</h2>
+            <label for="edit-name">Nome:</label>
+            <input type="text" id="edit-name">
+            
+            <label for="edit-age">Idade:</label>
+            <input type="number" id="edit-age">
+
+            <label for="edit-gender">Sexo:</label>
+            <select id="edit-gender">
+                <option value="Masculino">Masculino</option>
+                <option value="Feminino">Feminino</option>
+                <option value="Outro">Outro</option>
+            </select>
+
+            <label for="edit-address">Endereço:</label>
+            <input type="text" id="edit-address">
+
+            <label for="edit-phone">Telefone:</label>
+            <input type="text" id="edit-phone">
+
+            <button id="save-button">Salvar</button>
+        </div>
+    </section>
+
+    <script src="../client/account.js"></script>
+</body>
+</html>

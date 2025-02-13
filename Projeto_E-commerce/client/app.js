@@ -21,20 +21,27 @@ function renderProducts(products) {
     products.forEach(product => {
         const productCard = document.createElement('div');
         productCard.classList.add('product-card');
+
         productCard.innerHTML = `
             <img src="${product.imageUrl}" alt="${product.name}">
             <h2>${product.name}</h2>
             <p>R$ ${product.price.toFixed(2)}</p>
-            <div>
-                <button onclick="changeQuantity('${product._id}', -1)">-</button>
-                <span id="quantity-${product._id}">1</span>
-                <button onclick="changeQuantity('${product._id}', 1)">+</button>
+            <div class="button-container">
+                <button class="add-to-cart" onclick="addToCart('${product._id}', '${product.name}', ${product.price})">
+                    Adicionar ao Carrinho
+                </button>
+                <div class="quantity-controls">
+                    <button onclick="changeQuantity('${product._id}', -1)">-</button>
+                    <span id="quantity-${product._id}">1</span>
+                    <button onclick="changeQuantity('${product._id}', 1)">+</button>
+                </div>
             </div>
-            <button onclick="addToCart('${product._id}', '${product.name}', ${product.price})">Adicionar ao Carrinho</button>
         `;
+
         productsContainer.appendChild(productCard);
     });
 }
+
 
 // Adicionar um produto ao carrinho e salvar no localStorage
 function addToCart(productId, productName, productPrice) {
