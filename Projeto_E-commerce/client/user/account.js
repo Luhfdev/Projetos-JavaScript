@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    // Exibir informações do usuário
     document.getElementById("user-name").textContent = user.name;
     document.getElementById("user-age").textContent = user.age;
     document.getElementById("user-gender").textContent = user.gender;

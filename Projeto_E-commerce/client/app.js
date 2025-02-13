@@ -1,8 +1,7 @@
-const API_URL = 'http://localhost:5000/products'; // URL do backend
+const API_URL = 'http://localhost:5000/products';
 
-let cart = []; // Carrinho vazio no início
+let cart = [];
 
-// Buscar produtos do backend e exibir na página
 async function fetchProducts() {
     try {
         const response = await fetch(API_URL);
@@ -13,10 +12,9 @@ async function fetchProducts() {
     }
 }
 
-// Renderizar produtos na página
 function renderProducts(products) {
     const productsContainer = document.getElementById('products');
-    productsContainer.innerHTML = ''; // Limpa antes de carregar
+    productsContainer.innerHTML = '';
 
     products.forEach(product => {
         const productCard = document.createElement('div');
@@ -42,39 +40,34 @@ function renderProducts(products) {
     });
 }
 
-
-// Adicionar um produto ao carrinho e salvar no localStorage
 function addToCart(productId, productName, productPrice) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-    // Obter a quantidade atual do produto
     const quantity = parseInt(document.getElementById(`quantity-${productId}`).textContent) || 1;
 
     const existingProduct = cart.find(item => item.id === productId);
     if (existingProduct) {
-        existingProduct.quantity += quantity;  // Soma a quantidade se já existir no carrinho
+        existingProduct.quantity += quantity; 
     } else {
-        cart.push({ id: productId, name: productName, price: productPrice, quantity });  // Caso contrário, adiciona novo item
+        cart.push({ id: productId, name: productName, price: productPrice, quantity }); 
     }
 
     localStorage.setItem('cart', JSON.stringify(cart));
 
-    // Atualiza o contador no carrinho com a quantidade total de produtos
-    const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);  // Soma todas as quantidades
-    document.getElementById('cart-count').textContent = totalQuantity;  // Exibe o total de itens no carrinho
+    const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0); 
+    document.getElementById('cart-count').textContent = totalQuantity;
 
-    animateCartAddition();  // Animação do carrinho
+    animateCartAddition(); 
 }
 
-// Remover um produto do carrinho
 function removeFromCart(productId) {
     const productIndex = cart.findIndex(item => item.id === productId);
 
     if (productIndex !== -1) {
         if (cart[productIndex].quantity > 1) {
-            cart[productIndex].quantity -= 1; // Reduz a quantidade
+            cart[productIndex].quantity -= 1; 
         } else {
-            cart.splice(productIndex, 1); // Remove o item se for a última unidade
+            cart.splice(productIndex, 1); 
         }
     }
 
@@ -82,10 +75,9 @@ function removeFromCart(productId) {
     updateCartDisplay();
 }
 
-// Atualizar a exibição do carrinho
 function updateCartDisplay() {
     const cartDetails = document.getElementById('cart-details');
-    cartDetails.innerHTML = ''; // Limpa antes de exibir
+    cartDetails.innerHTML = '';
 
     if (cart.length === 0) {
         cartDetails.innerHTML = '<p>O carrinho está vazio.</p>';
@@ -103,14 +95,12 @@ function updateCartDisplay() {
     });
 }
 
-// Animação ao adicionar ao carrinho
 function animateCartAddition() {
     const cartElement = document.getElementById('cart');
     cartElement.classList.add('animate');
     setTimeout(() => cartElement.classList.remove('animate'), 500);
 }
 
-// Calcular o total do carrinho
 function calculateTotal() {
     return cart.reduce((total, product) => total + product.price * product.quantity, 0);
 }
@@ -119,12 +109,10 @@ function changeQuantity(productId, change) {
     const quantityElement = document.getElementById(`quantity-${productId}`);
     let currentQuantity = parseInt(quantityElement.textContent);
 
-    // Atualiza a quantidade, mas não permite que seja menor que 1
     currentQuantity = Math.max(1, currentQuantity + change);
 
-    quantityElement.textContent = currentQuantity; // Atualiza o valor mostrado
+    quantityElement.textContent = currentQuantity;
 
-    // Atualiza no carrinho armazenado em localStorage
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     const productInCart = cart.find(item => item.id === productId);
     
@@ -135,5 +123,4 @@ function changeQuantity(productId, change) {
     localStorage.setItem('cart', JSON.stringify(cart));
 }
 
-// Carregar produtos ao iniciar a página
 fetchProducts();

@@ -83,7 +83,7 @@ a {
     border-radius: 5px;
     cursor: pointer;
     transition: background 0.3s;
-    margin-bottom: 10px; /* Espaçamento entre o botão e os de quantidade */
+    margin-bottom: 10px;
 }
 
 .add-to-cart:hover {

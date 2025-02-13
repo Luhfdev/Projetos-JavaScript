@@ -11,16 +11,14 @@ document.getElementById("register-form").addEventListener("submit", function(eve
 
     let customers = JSON.parse(localStorage.getItem("customers")) || [];
 
-    // Verifica se o e-mail já foi cadastrado
     if (customers.some(c => c.email === email)) {
         alert("Este e-mail já está cadastrado!");
         return;
     }
 
-    // Armazena os dados no localStorage
     customers.push({ name, age, gender, address, email, phone, password });
     localStorage.setItem("customers", JSON.stringify(customers));
 
     alert("Cadastro realizado com sucesso!");
-    window.location.href = "login.html"; // Redireciona para login
+    window.location.href = "login.html"; 
 });

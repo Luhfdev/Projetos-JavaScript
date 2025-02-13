@@ -1,6 +1,6 @@
 document.getElementById("login-form").addEventListener("submit", function(event) {
     event.preventDefault();
-    console.log("Formulário enviado!"); // Verifica se o evento está disparando corretamente
+    console.log("Formulário enviado!");
 });
 
 document.getElementById("login-form").addEventListener("submit", function(event) {
@@ -11,13 +11,12 @@ document.getElementById("login-form").addEventListener("submit", function(event)
 
     let customers = JSON.parse(localStorage.getItem("customers")) || [];
 
-    // Verifica se o usuário existe e se a senha está correta
     const user = customers.find(c => c.email === email && c.password === password);
 
     if (user) {
         alert("Login bem-sucedido! Bem-vindo, " + user.name);
-        localStorage.setItem("loggedInUser", JSON.stringify(user)); // Salvar usuário logado
-        window.location.href = "../index.html"; // Redireciona para a página principal
+        localStorage.setItem("loggedInUser", JSON.stringify(user));
+        window.location.href = "../index.html";
     } else {
         alert("E-mail ou senha incorretos!");
     }
